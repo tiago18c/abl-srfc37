@@ -1,4 +1,4 @@
-use anchor_lang::prelude::*;
+use anchor_lang::{prelude::*, solana_program::program_option::COption};
 use anchor_spl::{token_2022::spl_token_2022, token_interface::Mint};
 use spl_tlv_account_resolution::{
     account::ExtraAccountMeta, seeds::Seed, state::ExtraAccountMetaList,
@@ -14,11 +14,7 @@ pub struct SetExtraMetasThaw<'info> {
     #[account()]
     pub list_config: Account<'info, ListConfig>,
 
-    #[account(
-        seeds = [ebalts::state::MintConfig::SEED_PREFIX, mint.key().as_ref()],
-        bump,
-        seeds::program = ebalts::ID,
-    )]
+    #[account()]
     /// CHECK: checked by seeds
     pub ebalts_mint_config: UncheckedAccount<'info>,
 
@@ -38,6 +34,7 @@ pub struct SetExtraMetasThaw<'info> {
     pub extra_metas_thaw: AccountInfo<'info>,
 
     pub system_program: Program<'info, System>,
+
 }
 
 pub fn set_extra_metas_thaw(ctx: Context<SetExtraMetasThaw>) -> Result<()> {
@@ -48,7 +45,7 @@ pub fn set_extra_metas_thaw(ctx: Context<SetExtraMetasThaw>) -> Result<()> {
     // only the selected freeze authority should be able to set the extra metas
 
     require!(
-        mint_config.freeze_authority == ctx.accounts.authority.key(),
+        mint_config.freeze_authority == ctx.accounts.authority.key() && ctx.accounts.mint.freeze_authority == COption::Some(ctx.accounts.ebalts_mint_config.key()),
         ProgramErrors::InvalidAuthority
     );
 
@@ -86,5 +83,5 @@ fn get_extra_metas(config: &Pubkey) -> Vec<ExtraAccountMeta> {
 }
 
 fn get_extra_metas_size() -> usize {
-    ExtraAccountMetaList::size_of(1).unwrap()
+    ExtraAccountMetaList::size_of(2).unwrap()
 }

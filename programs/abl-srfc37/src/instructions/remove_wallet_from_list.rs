@@ -15,7 +15,7 @@ pub struct RemoveWalletFromList<'info> {
     #[account(
         mut,
         close = authority,
-        seeds = [list_config.seed.as_ref(), ab_wallet.wallet.as_ref()],
+        seeds = [list_config.key().as_ref(), ab_wallet.wallet.as_ref()],
         bump
     )]
     pub ab_wallet: Account<'info, ABWallet>,

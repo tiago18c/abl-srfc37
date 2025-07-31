@@ -17,7 +17,7 @@ pub struct AddWalletToList<'info> {
         init,
         payer = authority,
         space = 8 + ABWallet::INIT_SPACE,
-        seeds = [list_config.seed.as_ref(), wallet.as_ref()],
+        seeds = [list_config.key().as_ref(), wallet.as_ref()],
         bump
     )]
     pub ab_wallet: Account<'info, ABWallet>,
@@ -26,6 +26,9 @@ pub struct AddWalletToList<'info> {
 }
 
 pub fn add_wallet_to_list(ctx: Context<AddWalletToList>, wallet: Pubkey) -> Result<()> {
-    ctx.accounts.ab_wallet.set_inner(ABWallet { wallet });
+    ctx.accounts.ab_wallet.set_inner(ABWallet {
+        wallet,
+        list_config: ctx.accounts.list_config.key(),
+    });
     Ok(())
 }

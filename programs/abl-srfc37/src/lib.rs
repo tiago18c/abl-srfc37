@@ -15,7 +15,7 @@ pub use errors::*;
 use instructions::*;
 pub use state::*;
 
-declare_id!("CMKdNTip9w21wNxfwN6J9pdRGMosNDx9KjpKMVuLPQVu");
+declare_id!("8hNxmWetsVptuZ5LGYC6fM4xTpoUfPijz3NyYctyM79N");
 
 
 #[program]

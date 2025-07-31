@@ -4,6 +4,7 @@ use anchor_lang::prelude::*;
 #[derive(InitSpace)]
 pub struct ABWallet {
     pub wallet: Pubkey,
+    pub list_config: Pubkey,
 }
 
 #[account]
