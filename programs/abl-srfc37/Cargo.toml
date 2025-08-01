@@ -24,8 +24,11 @@ anchor-spl = { version = "0.31.1", features = [
     "token_2022",
 ] }
 
+solana-curve25519 = "2.2.1"
 solana-instruction = "=2.2.1"
-ebalts-interface = { git = "https://github.com/tiago18c/ebalts"}
-ebalts = { git = "https://github.com/tiago18c/ebalts", features = ["no-entrypoint"]}
+ebalts-interface = { git = "https://github.com/tiago18c/ebalts" }
+ebalts = { git = "https://github.com/tiago18c/ebalts", features = [
+    "no-entrypoint",
+] }
 spl-discriminator = "0.4.1"
 spl-tlv-account-resolution = "0.10.0"
