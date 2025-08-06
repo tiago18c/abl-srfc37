@@ -10,6 +10,7 @@ dependencies = [
  "anchor-spl",
  "ebalts",
  "ebalts-interface",
+ "solana-curve25519",
  "solana-instruction",
  "spl-discriminator",
  "spl-tlv-account-resolution 0.10.0",
