@@ -7,4 +7,5 @@ pub enum ProgramErrors {
     InvalidMintConfig,
     InvalidABWallet,
     Unauthorized,
+    InvalidListConfig,
 }
